@@ -5,3 +5,21 @@
     <li>價錢: <%= @item.price %></li>
     <li>規格: <%= @item.spec %></li>
 </ul>
+<h3>留言</h3>
+<%= form_for(@comment, url: item_comments_path(@item), remote: true) do |form| %>
+  <div class="form-group">
+    <%= form.text_area :content, class: 'form-control' %>
+  </div>
+  <%= form.submit class: 'btn btn-success' %>
+<% end %>
+  
+<hr>
+
+<% @comments.each do |comment| %> 
+  <div class="alert alert-light">    
+    <p><%= comment.content %></p>
+    <hr>
+    <% #comment.user 會印出user的記憶體位置 %>
+    <p class="mt-0">posted by <%= comment.user.email %> | <%= comment.created_at %> </p>
+  </div>   
+<% end %>

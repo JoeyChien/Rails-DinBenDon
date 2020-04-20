@@ -1,5 +1,4 @@
 class ItemsController < ApplicationController
-
   before_action :find_item, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -7,6 +6,11 @@ class ItemsController < ApplicationController
   end
   
   def show
+    @comment = Comment.new
+    # eager loading，解決n+1 query的問題，預先載入關聯資料，減少查詢的次數
+    # 把comment裡面用到的user資料先抓出來，在view的時候再用in的方式抓想要的user
+    # SELECT "users".* FROM "users" WHERE "users"."id" IN (?, ?)  [["id", 1], ["id", 4]]
+    @comments = @item.comments.includes(:user)     
   end
 
   def new

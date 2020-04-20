@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     user = User.find_by(email: user_params[:email],
                         password: user_params[:password])
     if user
-      session[:ccc9527] = user.email
+      session[:joey2020] = user.id
       redirect_to root_path
     else
       redirect_to login_path
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     if @user.save
       # 密碼加密
       # 幫登入
-      session[:ccc9527] = @user.email
+      session[:joey2020] = @user.id
       redirect_to root_path
       else
       # 失敗，借signup的action的頁面來渲染
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     end           
   end
   def logout
-    session[:ccc9527] = nil
+    session[:joey2020] = nil
     redirect_to root_path
   end
 
