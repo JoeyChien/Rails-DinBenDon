@@ -1,1 +1,5 @@
-alert('hiiii  <%= current_user.email %>')
+var comments = document.querySelector('#comments');
+// j 是幫忙讓js可以讀好後面的render語法 @comment是從controller要過來的
+comments.innerHTML = "<%= j render('comments/comment', comment: @comment) %>" + comments.innerHTML
+
+document.querySelector('#comment_content').value = ""

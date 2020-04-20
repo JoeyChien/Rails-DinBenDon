@@ -1,0 +1,8 @@
+
+
+<div class="alert alert-light">    
+  <p><%= comment.content %></p>
+  <hr>
+  <% #如果用comment.user 會印出user的記憶體位置 %>
+  <p class="mt-0">posted by <%= comment.user.email %> | <%= comment.created_at %> </p>
+</div> 

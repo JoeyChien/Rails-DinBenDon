@@ -14,12 +14,9 @@
 <% end %>
   
 <hr>
+<div id="comments">
+  <% @comments.each do |comment| %> 
+    <%= render 'comments/comment', comment: comment %>   
+  <% end %>
+</div>
 
-<% @comments.each do |comment| %> 
-  <div class="alert alert-light">    
-    <p><%= comment.content %></p>
-    <hr>
-    <% #comment.user 會印出user的記憶體位置 %>
-    <p class="mt-0">posted by <%= comment.user.email %> | <%= comment.created_at %> </p>
-  </div>   
-<% end %>
