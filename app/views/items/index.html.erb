@@ -3,13 +3,15 @@
 
 <div class="row item">
   <% @items.each do |item| %>
-      <div class="col-6 col-md-3">
+      <div class="col-6 col-md-3"  data-controller="addtocart">
         <div class="card mt-3">
           <%= image_tag item.cover.variant(resize_to_limit: [300, 300]), class: 'cover-image' if item.cover.attached? %>
           <div class="card-body">
             <h5 class="card-title"><%= link_to item.name, item_path(item.id) %></h5>
-            <%= link_to "編輯", edit_item_path(item.id), class: 'btn btn-primary' %>
-            <%= link_to "刪除", item_path(item.id), method: 'delete', data: {confirm: "是否確認刪除?"}, class: 'btn btn-danger' %>
+            <input type="hidden" data-target="addtocart.item_id" value="<%= item.id %>">
+            <%= link_to "編輯", edit_item_path(item.id), class: 'btn btn-sm btn-primary' %>
+            <%= link_to "刪除", item_path(item.id), method: 'delete', data: {confirm: "是否確認刪除?"}, class: 'btn btn-sm btn-danger' %>
+            <%= button_tag  "加入" , class: 'btn btn-sm btn-primary', data: {action: 'addtocart#additem' } %>
           </div>
         </div>
       </div>

@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found  
   
-  # 定義成在controller & view也可以用的方法
-  helper_method :current_user
+  # 定義成在view也可以用的方法(原本只能在controller)
+  helper_method :current_user, :current_cart
 
   private
 
@@ -22,5 +22,9 @@ class ApplicationController < ActionController::Base
   def current_user
     # find沒找到會噴錯誤訊息造成nav中使用這個方法的地方出錯導向404，故改用find_by(沒有會回nil)
     User.find_by(id: session[:joey2020])
+  end
+
+  def current_cart
+    @ca2020 ||= Cart.from_hash(session[:carty])
   end
 end
