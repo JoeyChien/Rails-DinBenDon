@@ -31,8 +31,8 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
-  #使用FactoryBot的時候就可以省略前綴
-  config.include FactoryBot::Syntax::Methods
+    #使用FactoryBot的時候就可以省略前綴
+    config.include FactoryBot::Syntax::Methods
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

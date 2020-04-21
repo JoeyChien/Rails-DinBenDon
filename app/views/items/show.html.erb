@@ -1,22 +1,39 @@
-<h1>餐點名稱: <%= @item.name %></h1>
+<h1 data-controller="item">
+  <%= @item.name %> (<%= @item.price %> 元)
+  <a href="#" class="btn btn-danger" data-action="item#carrot">
+    <i id="like" class="fas fa-carrot" data-target="item.icon"></i>
+  </a>  
+</h1>
+
+<% #image_tag @item.cover.variant(resize) (resize_to_limit: [300, 300]), class: 'cover-image' if @item.cover.attached? %> 
 
 <ul>
     <li>詳細: <%= @item.description %></li>
     <li>價錢: <%= @item.price %></li>
     <li>規格: <%= @item.spec %></li>
 </ul>
-<h3>留言</h3>
-<%= form_for(@comment, url: item_comments_path(@item), remote: true) do |form| %>
-  <div class="form-group">
-    <%= form.text_area :content, class: 'form-control' %>
+
+<div data-controller="comment">
+  <h3>留言</h3>
+    <%= form_for(@comment, url: item_comments_path(@item), remote: true) do |form| %>
+      <div class="form-group">
+        <%= form.text_area :content, 
+                 class: 'form-control', 
+                 data: {target: 'comment.content', 
+                        action: 'keyup->comment#check'} %>
+                        <% #target用點，action用# %>
+                        <% #當keyupe事件觸發去執行comment#check %>
+      </div>
+      <%= form.submit class: 'btn btn-success', disabled: true, data: {target: 'comment.submit'} %>
+    <% end %>
+      
+  <hr>
+  <div id="comments">
+      <% @comments.each do |comment| %> 
+        <%= render 'comments/comment', comment: comment %>   
+      <% end %>
   </div>
-  <%= form.submit class: 'btn btn-success' %>
-<% end %>
-  
-<hr>
-<div id="comments">
-  <% @comments.each do |comment| %> 
-    <%= render 'comments/comment', comment: comment %>   
-  <% end %>
+
+
 </div>
 
