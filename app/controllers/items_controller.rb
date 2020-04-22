@@ -50,7 +50,7 @@ class ItemsController < ApplicationController
   def add_to_cart
     current_cart.add_item(@item.id)
     session[:carty] = current_cart.to_hash
-    render json: { cart_count: current_cart.items.count }
+    render json: { items_count: current_cart.items.count }
   end
 
   private
