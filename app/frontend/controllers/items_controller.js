@@ -4,8 +4,25 @@ import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 
 export default class extends Controller {
-  // 定義icon是target
+  // 定義item_id是target
   static targets = ["icon","item_id" ]
+
+  additem(e) {
+    e.preventDefault();
+  
+    let item_id = this.item_idTarget.value;
+  
+    Rails.ajax({
+      url: `/items/${item_id}/add_to_cart`, 
+      type: 'POST', 
+      success: resp => {
+        document.querySelector('#items_count').innerText = resp.items_count 
+      }, 
+      error: err => {
+        console.log(err);
+      } 
+    })
+  }
 
   heart(e) {
     e.preventDefault();   
@@ -28,24 +45,9 @@ export default class extends Controller {
         console.log(err);
       }      
     })
+  }
 
-
-    additem(e) {
-      e.preventDefault();
   
-      let item_id = this.item_idTarget.value;
-  
-      Rails.ajax({
-        url: `/items/${item_id}/add_to_cart`, 
-        type: 'POST', 
-        success: resp => {
-          document.querySelector('#items_count').innerText = resp.items_count 
-        }, 
-        error: err => {
-          console.log(err);
-        } 
-      })
-    }
     /*axios的方法*/
     // const csrfToken = document.querySelector('[name=csrf-token]').content;
     // ax.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
@@ -76,6 +78,4 @@ export default class extends Controller {
     //   this.clicked = true;
     // }    
 
-
-  }
 }
