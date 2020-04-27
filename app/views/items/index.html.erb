@@ -8,7 +8,7 @@
           <%= image_tag item.cover.variant(resize_to_limit: [300, 300]), class: 'cover-image' if item.cover.attached? %>
           <div class="card-body" data-controller="item">
             <h5 class="card-title"><%= link_to item.name, item_path(item.id) %></h5> 
-            <input type="hidden" data-target="item.item_id" value="<%= item.id %>">          
+            <input type="hidden" data-target="item.itemId" value="<%= item.id %>">          
             <%= link_to "編輯", edit_item_path(item.id), class: 'btn btn-sm btn-primary' %>
             <%= link_to "刪除", item_path(item.id), method: 'delete', data: {confirm: "是否確認刪除?"}, class: 'btn btn-sm btn-danger' %>
             <%= button_tag "加到購物車", method: 'post', class: 'btn btn-danger', data: {action: 'item#additem'} %>

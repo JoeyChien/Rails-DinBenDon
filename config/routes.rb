@@ -20,7 +20,17 @@ Rails.application.routes.draw do
   end
 
   # cart ,寫as才有path,resource不加s，可以做出沒有id的路徑出來
-  resource :cart, only: [:show, :destroy]
+  resource :cart, only: [:show, :destroy] do
+    collection do
+      get :checkout
+    end
+  end
+
+  resources :orders, only: [:index, :show, :create] do
+    member do
+      delete :cancel
+    end
+  end
 
   # users
   get "/login", to: "users#login"

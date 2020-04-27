@@ -30,6 +30,9 @@ gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
+gem "braintree", "~> 2.101.0"
+gem 'figaro', '~> 1.1', '>= 1.1.1'
+gem 'aasm', '~> 5.0', '>= 5.0.8'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -38,7 +41,7 @@ group :development, :test do
   gem 'faker', '~> 2.11'
   gem 'factory_bot_rails', '~> 5.1', '>= 5.1.1'
   gem 'timecop', '~> 0.9.1'
-  gem 'hirb-unicode', '~> 0.0.5'
+  gem 'hirb-unicode', '~> 0.0.5' 
 end
 
 group :development do

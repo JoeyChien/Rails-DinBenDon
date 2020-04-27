@@ -1,4 +1,4 @@
-<h1 data-controller="items">
+<h1 data-controller="item">
   <%= @item.name %> (<%= @item.price %> 元)
  
   <a href="#" class="btn btn-danger" data-action="item#heart">
@@ -8,7 +8,7 @@
       <i id="like" class="far fa-heart" data-target="item.icon"></i>
     <% end %>
   </a>  
-  <input type="hidden" data-target="item.item_id" value="<%= @item.id %>">
+  <input type="hidden" data-target="item.itemId" value="<%= @item.id %>">
   <%= button_tag "加到購物車", method: 'post', class: 'btn btn-danger', data: {action: 'item#additem'} %>
 </h1>
 
@@ -24,7 +24,7 @@
   <h3>留言</h3>
     
     <%= form_for(@comment, url: item_comments_path(@item), remote: true) do |form| %>
-    <input type="hidden" id="item_id" value="<%= @item.id %>">
+    <input type="hidden" id="itemId" value="<%= @item.id %>">
       <div class="form-group">
         <%= form.text_area :content, 
                  class: 'form-control', 

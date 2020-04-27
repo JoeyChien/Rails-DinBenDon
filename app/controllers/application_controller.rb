@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   # 定義成在view也可以用的方法(原本只能在controller)
   helper_method :current_user, :current_cart
 
+
   private
 
   def check_login
@@ -26,5 +27,14 @@ class ApplicationController < ActionController::Base
 
   def current_cart
     @ca2020 ||= Cart.from_hash(session[:carty])
+  end
+
+  def gateway
+    Braintree::Gateway.new(
+      environment: :sandbox,
+      merchant_id: ENV['bt_merchant_id'],
+      public_key: ENV['bt_public_key'],
+      private_key: ENV['bt_private_key']
+    )
   end
 end

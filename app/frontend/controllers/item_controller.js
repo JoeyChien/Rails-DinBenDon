@@ -4,16 +4,16 @@ import { Controller } from "stimulus"
 import Rails from "@rails/ujs"
 
 export default class extends Controller {
-  // 定義item_id是target
-  static targets = ["icon","item_id" ]
+  // 定義itemId是target
+  static targets = ["icon","itemId" ]
 
   additem(e) {
     e.preventDefault();
   
-    let item_id = this.item_idTarget.value;
+    let itemId = this.itemIdTarget.value;
   
     Rails.ajax({
-      url: `/items/${item_id}/add_to_cart`, 
+      url: `/items/${itemId}/add_to_cart`, 
       type: 'POST', 
       success: resp => {
         document.querySelector('#items_count').innerText = resp.items_count 
@@ -27,10 +27,10 @@ export default class extends Controller {
   heart(e) {
     e.preventDefault();   
 
-    let item_id = document.querySelector('#item_id').value;
+    let item_id = document.querySelector('#itemId').value;
 
     Rails.ajax({
-      url: `/api/v1/items/${item_id}/favorite`,
+      url: `/api/v1/items/${itemId}/favorite`,
       type: 'POST',
       success: resp => {
         if (resp.status === "favorited"){
