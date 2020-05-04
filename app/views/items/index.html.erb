@@ -1,6 +1,5 @@
 <h1>餐點列表</h1>
-<%= link_to "新增", new_item_path  %>
-
+<%= link_to "新增", new_item_path, class: 'btn btn-sm btn-primary' %>
 <div class="row item">
   <% @items.each do |item| %>
       <div class="col-6 col-md-3">
@@ -11,7 +10,7 @@
             <input type="hidden" data-target="item.itemId" value="<%= item.id %>">          
             <%= link_to "編輯", edit_item_path(item.id), class: 'btn btn-sm btn-primary' %>
             <%= link_to "刪除", item_path(item.id), method: 'delete', data: {confirm: "是否確認刪除?"}, class: 'btn btn-sm btn-danger' %>
-            <%= button_tag "加到購物車", method: 'post', class: 'btn btn-danger', data: {action: 'item#additem'} %>
+            <%= button_tag "加到購物車", method: 'post', class: 'btn btn-sm btn-warning', data: {action: 'item#additem'} %>
           </div>
         </div>
       </div>

@@ -24,10 +24,12 @@
     </ul>
     <% if current_user %>
       <ul class="navbar-nav">
-       <li class="nav-item">
+       <li class="nav-item" data-controller = "cart" data-target="cart.myCart">
           <%= link_to cart_path, class: 'nav-link' do %> 
             購物車 <i class='fas fa-shopping-cart'></i> 
-            <span id="items_count"><%= current_cart.items.count %></span>
+            <span data-target="cart.cartCounter" data-action="addItemToCart@document->cart#updateCart">
+              <%= current_cart.items.count %>
+            </span>
           <% end %>        
         </li> 
         <li class="nav-item">

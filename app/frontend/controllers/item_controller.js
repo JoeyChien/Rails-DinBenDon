@@ -7,21 +7,24 @@ export default class extends Controller {
   // 定義itemId是target
   static targets = ["icon","itemId" ]
 
+
   additem(e) {
     e.preventDefault();
   
-    let itemId = this.itemIdTarget.value;
-  
+    let itemId = this.itemIdTarget.value; 
+
     Rails.ajax({
       url: `/items/${itemId}/add_to_cart`, 
       type: 'POST', 
       success: resp => {
-        document.querySelector('#items_count').innerText = resp.items_count 
+        let event  = new CustomEvent('addItemToCart', { 'detail': resp.items_count });
+        document.dispatchEvent(event );
       }, 
       error: err => {
         console.log(err);
       } 
     })
+ 
   }
 
   heart(e) {
